@@ -1,0 +1,49 @@
+<div class="main-container">
+    <h1>Editar</h1>
+  <!-- personForm: nombre del formulario en la conexión con ts
+    editPerson: método para activar al enviar el formulario por medio del submit, se carga con los datos preestablecidos y los registrados en el input
+    cada formControlName se identifica con un campo de los asignados en la creación del formulario en ts-->
+ <form [formGroup]="personForm" (ngSubmit)="editPerson(personForm.value)" class=" container">
+    <fieldset disabled><!--desactiva las primeras casillas para que sean de solo lectura-->
+        <div class="form-group">
+          <label for="name">Nombres y Apellidos</label>
+          <input type="text" formControlName = "name"class="form-control" id="disabledTextInput" placeholder="{{data.name}}">
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" formControlName = "email" class="form-control" id="email" >
+        </div>
+
+        <div class="form-group">
+          <label for="number">Teléfono</label>
+          <input type="number" formControlName = "number" class="form-control" id="number">
+        </div>
+
+        </fieldset>
+
+      <div class="form-group">
+        <label for="favoriteFood">Comida Favorita</label>
+        <input type="text" formControlName = "favoriteFood" class="form-control" id="favoriteFood" >
+      </div>
+
+      <div class="form-group">
+        <label for="favoriteArtist">Artista Favorito</label>
+        <input type="text" formControlName = "favoriteArtist" class="form-control" id="favoriteArtist" >
+      </div>
+
+      <div class="form-group">
+        <label for="favoritePlace">Lugar Favorito</label>
+        <input type="text" formControlName = "favoritePlace" class="form-control" id="favoritePlace" >
+      </div>
+
+      <button type="submit" class="btn btn-warning" style="margin-left:15px">Enviar</button>
+    </form>
+  </div>
+
+<!--Loading para animación mientras cargan los datos-->
+<ng-template #loading>
+  <div class="container-spinner">
+    <mat-spinner></mat-spinner>
+  </div>
+</ng-template>

@@ -1,0 +1,67 @@
+<div class="main-container">
+  <h1>Encuesta</h1>
+  <!-- personForm: nombre del formulario en la conexión con ts
+    onSaveForm: método para activar al enviar el formulario por medio del submit
+    cada formControlName se identifica con un campo de los asignados en la creación del formulario en ts-->
+  <form [formGroup]="personForm" (ngSubmit)="onSaveForm()" class=" container py-5 container-fluid">
+
+    <div class="form-group">
+      <label for="name">Nombres y Apellidos</label>
+      <input type="text" formControlName = "name"class="form-control" id="name" placeholder="Tu Nombre">
+      <div class="alert-danger" *ngIf="name.invalid &&  (name.dirty || name.touched)">
+          El nombre es requerido y debe tener entre 5 y 50 caracteres
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" formControlName = "email" class="form-control" id="email" placeholder="Tu Email">
+      <div class="alert-danger" *ngIf="email.invalid &&  (email.dirty || email.touched)">
+        <div class="container-error-message" *ngIf="email.errors.required">
+          El email es requerido
+        </div>
+        <div class="container-error-message" *ngIf="email.errors.pattern">
+          Debe ingresar un formato de correo electrónico válido
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="number">Teléfono</label>
+      <input type="number" formControlName = "number" class="form-control" id="number" placeholder="Tu Teléfono">
+      <div class="alert-danger" *ngIf="number.invalid &&  (number.dirty || number.touched)">
+          El número de telefono es requerido
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="favoriteFood">Comida Favorita</label>
+      <input type="text" formControlName = "favoriteFood" class="form-control" id="favoriteFood" placeholder="Tu Comida Favorita">
+      <div class="alert-danger" *ngIf="favoriteFood.invalid &&  (favoriteFood.dirty || favoriteFood.touched)">
+        Este campo es requerido y debe tener entre 3 y 30 caracteres
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="favoriteArtist">Artista Favorito</label>
+      <input type="text" formControlName = "favoriteArtist" class="form-control" id="favoriteArtist" placeholder="Tu Artista Favorito">
+      <div class="alert-danger" *ngIf="favoriteArtist.invalid &&  (favoriteArtist.dirty || favoriteArtist.touched)">
+        Este campo es requerido y debe tener entre 3 y 30 caracteres
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="favoritePlace">Lugar Favorito</label>
+      <input type="text" formControlName = "favoritePlace" class="form-control" id="favoritePlace" placeholder="Tu Lugar Favorito">
+      <div class="alert-danger" *ngIf="favoritePlace.invalid &&  (favoritePlace.dirty || favoritePlace.touched)">
+        Este campo es requerido y debe tener entre 3 y 30 caracteres
+      </div>
+    </div>
+      <button type="submit" class="btn btn-warning" style="margin-left:15px">Enviar</button>
+
+  </form>
+  <div *ngIf="personForm.valid">
+    <button class=" btn-primary md-my-5"  (click)="exportAsXLSX()">Exporta tus respuestas en Excel</button>
+  </div>
+
+</div>
