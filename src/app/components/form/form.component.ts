@@ -4,7 +4,7 @@ import { ExporterService } from '../../services/exporter.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { MatTableDataSource } from '@angular/material';
-import { Person } from '../entities/person.interface';
+import { Person } from '../../entities/person.interface';
 
 
 
@@ -18,7 +18,7 @@ import { Person } from '../entities/person.interface';
 
 export class FormComponent implements OnInit {
   //patron para el correo
-   ELEMENT_DATA: Person[] = [
+   ELEMENT_DATA: any[] = [
     {name: "", email: "", number: null, favoriteFood: "", favoriteArtist:"", favoritePlace: ""}
   ];
 
