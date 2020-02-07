@@ -5,23 +5,27 @@ import { ReactiveFormsModule } from '@angular/forms';
 //imports de los componentes de la aplicación, y servicios para la db
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { FormComponent } from './components/form/form.component';
+import { FormComponent } from './components/v1/form/form.component';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule} from '@angular/fire/firestore';
 import { environment } from '../environments/environment';
 import { DataDbService} from './services/data-db.service';
-import { ListComponent } from './components/list/list.component';
-import { UpdateComponent } from './components/update/update.component';
+import { ListComponent } from './components/v1/list/list.component';
+import { UpdateComponent } from './components/v1/update/update.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material.module';
-import { ListModule } from './components/list/list.module';
+import { ListModule } from './components/v1/list/list.module';
+import { FormQuestionComponent } from './components/v1/form-question/form-question.component';
+import { HeaderComponent } from './components/shared/header/header.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     FormComponent,
     ListComponent,
-    UpdateComponent
+    UpdateComponent,
+    FormQuestionComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,

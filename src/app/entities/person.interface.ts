@@ -4,7 +4,10 @@ export interface Person{//interface de objeto para el coleccionable en firestore
   nameToSearch:string;
   email:string;
   number:number;
-  favoriteFood:string;
-  favoriteArtist:string;
-  favoritePlace:string;
+  question1:string;
+  question2:string;
+  question3:string;
+  answer1:string;
+  answer2:string;
+  answer3:string;
 }

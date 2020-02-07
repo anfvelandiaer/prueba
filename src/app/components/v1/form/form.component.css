@@ -1,0 +1,30 @@
+.ng-invalid.ng-touched:not(form){
+  border: 1px solid red;
+}
+
+.main-container{
+  margin:10px;
+  margin-top: 10px;
+  padding: 1px;
+  background-color: #333;
+  color: #fff;
+}
+
+h1{
+  color: #D81515;
+  text-align:center;
+}
+
+.alert-danger{
+  color: #721c24;
+  background: #f8d7da;
+  border-color: #f5c6cb;
+  margin-bottom: 5px;
+  padding:5px;
+}
+
+.form-group{
+  margin-left: 15px;
+  padding:3px;
+  margin-right:20px;
+}

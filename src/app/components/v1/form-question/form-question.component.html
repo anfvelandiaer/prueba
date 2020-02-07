@@ -1,0 +1,38 @@
+<div class="main-container" *ngIf="questions$ | async as question;else loading">
+  <h1>Preguntas</h1>
+  <!-- personForm: nombre del formulario en la conexión con ts
+    onSaveForm: método para activar al enviar el formulario por medio del submit
+    cada formControlName se identifica con un campo de los asignados en la creación del formulario en ts-->
+  <form [formGroup]="questionForm" (ngSubmit)="onEditForm(questionForm.value)" class=" container py-5 container-fluid">
+
+    <div class="form-group">
+      <label for="question1">Pregunta 1</label>
+      <input type="text" formControlName = "question1"class="form-control" id="question1" placeholder ="{{question.question1}}">
+      <div class="alert-danger" *ngIf="question1.invalid &&  (question1.dirty || question1.touched)">
+          La pregunta es obligatoria y debe tener entre 5 y 50 caracteres
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="question2">Pregunta 2</label>
+      <input type="text" formControlName = "question2"class="form-control" id="question2" placeholder="Segunda Pregunta" placeholder ="{{question.question1}}">
+      <div class="alert-danger" *ngIf="question2.invalid &&  (question2.dirty || question2.touched)">
+          La pregunta es obligatoria y debe tener entre 5 y 50 caracteres
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="question3">Pregunta 3</label>
+      <input type="text" formControlName = "question3"class="form-control" id="question3" placeholder="Tercera Pregunta" placeholder ="{{question.question1}}">
+      <div class="alert-danger" *ngIf="question3.invalid &&  (question3.dirty || question3.touched)">
+          La pregunta es obligatoria y debe tener entre 5 y 50 caracteres
+      </div>
+    </div>
+    <button type="submit" class="btn btn-warning" style="margin-left:15px">Enviar</button>
+  </form>
+</div>
+<ng-template #loading>
+  <div class="container-spinner">
+    <mat-spinner></mat-spinner>
+  </div>
+</ng-template>

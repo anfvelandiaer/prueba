@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { DataDbService } from '../../services/data-db.service';
-import { ExporterService } from '../../services/exporter.service';
+import { DataDbService } from '../../../services/data-db.service';
+import { ExporterService } from '../../../services/exporter.service';
 import { Observable } from 'rxjs';
-import { Person } from '../../entities/person.interface';
+import { Person } from '../../../entities/person.interface';
 import { MatDialog } from '@angular/material/dialog'
 import { UpdateComponent } from '../update/update.component'
 import { MatTableDataSource } from '@angular/material';
@@ -16,12 +16,13 @@ export class ListComponent implements OnInit {
   public persons$: Observable<Person[]>;//$Convención para observable, observable que brinda la información de todos los objetos
   public person$: Observable<Person>;//para recuperar la información del objeto a actualizar
   public elements:Person[];
+
   constructor(private dbData: DataDbService, public dialog: MatDialog, private exportService:ExporterService) {
+
    }
 
    ngOnInit() {
      this.persons$ = this.dbData.getPersons();//Asignar al observable los datos de la db
-     console.log(this.persons$)
    }
 
    onEditPerson(person:Person){
@@ -37,8 +38,11 @@ export class ListComponent implements OnInit {
        console.log(`Dialog result ${result}`)//establecer el resultado al finalizar el update
      })
    }
-   public dataSource:MatTableDataSource<any>;
-   
+
+   exportAsXLSX(persons:Person[]):void{
+        this.exportService.exportToExcel(persons, 'my_export');
+      }
+
 
 
 }

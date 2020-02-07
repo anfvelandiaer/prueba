@@ -1,9 +1,9 @@
-<div class="main-container">
+<div class="main-container" *ngIf="questions$ | async as question;else loading">
   <h1>Encuesta</h1>
   <!-- personForm: nombre del formulario en la conexión con ts
     onSaveForm: método para activar al enviar el formulario por medio del submit
     cada formControlName se identifica con un campo de los asignados en la creación del formulario en ts-->
-  <form [formGroup]="personForm" (ngSubmit)="onSaveForm()" class=" container py-5 container-fluid">
+  <form [formGroup]="personForm" (ngSubmit)="onSaveForm(question)" class=" container py-5 container-fluid">
 
     <div class="form-group">
       <label for="name">Nombres y Apellidos</label>
@@ -33,27 +33,26 @@
           El número de telefono es requerido
       </div>
     </div>
-
     <div class="form-group">
-      <label for="favoriteFood">Comida Favorita</label>
-      <input type="text" formControlName = "favoriteFood" class="form-control" id="favoriteFood" placeholder="Tu Comida Favorita">
-      <div class="alert-danger" *ngIf="favoriteFood.invalid &&  (favoriteFood.dirty || favoriteFood.touched)">
+      <label for="answer1">{{question.question1}}</label>
+      <input type="text" formControlName = "answer1" class="form-control" id="answer1" placeholder="{{question.question1}}">
+      <div class="alert-danger" *ngIf="answer1.invalid &&  (answer1.dirty || answer1.touched)">
         Este campo es requerido y debe tener entre 3 y 30 caracteres
       </div>
     </div>
 
     <div class="form-group">
-      <label for="favoriteArtist">Artista Favorito</label>
-      <input type="text" formControlName = "favoriteArtist" class="form-control" id="favoriteArtist" placeholder="Tu Artista Favorito">
-      <div class="alert-danger" *ngIf="favoriteArtist.invalid &&  (favoriteArtist.dirty || favoriteArtist.touched)">
+      <label for="answer2">{{question.question2}}</label>
+      <input type="text" formControlName = "answer2" class="form-control" id="answer2" placeholder="{{question.question2}}">
+      <div class="alert-danger" *ngIf="answer2.invalid &&  (answer2.dirty || answer2.touched)">
         Este campo es requerido y debe tener entre 3 y 30 caracteres
       </div>
     </div>
 
     <div class="form-group">
-      <label for="favoritePlace">Lugar Favorito</label>
-      <input type="text" formControlName = "favoritePlace" class="form-control" id="favoritePlace" placeholder="Tu Lugar Favorito">
-      <div class="alert-danger" *ngIf="favoritePlace.invalid &&  (favoritePlace.dirty || favoritePlace.touched)">
+      <label for="answer3">{{question.question3}}</label>
+      <input type="text" formControlName = "answer3" class="form-control" id="answer3" placeholder="{{question.question3}}">
+      <div class="alert-danger" *ngIf="answer3.invalid &&  (answer3.dirty || answer3.touched)">
         Este campo es requerido y debe tener entre 3 y 30 caracteres
       </div>
     </div>
@@ -61,7 +60,13 @@
 
   </form>
   <div *ngIf="personForm.valid">
-    <button class=" btn-primary md-my-5"  (click)="exportAsXLSX()">Exporta tus respuestas en Excel</button>
+    <button class=" btn-primary md-my-5"  (click)="exportAsXLSX(question)">Exporta tus respuestas en Excel</button>
   </div>
 
 </div>
+
+<ng-template #loading>
+  <div class="container-spinner">
+    <mat-spinner></mat-spinner>
+  </div>
+</ng-template>
