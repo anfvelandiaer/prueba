@@ -20,6 +20,15 @@ import { Question } from '../../../entities/question.interface';
 export class FormComponent implements OnInit {
   //patron para el correo
   private emailPattern: any = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  questions$:Observable<Question>;
+  personForm: FormGroup;//nombre del formulario para captar la información en html
+  ELEMENT_DATA: any[] = [
+   {name: "", email: "", number: null, question1: "", answer1: "", question2:"", answer2:"", question3: "",  answer3: ""}
+ ];
+  dataSource = this.ELEMENT_DATA;
+
+
+
   createFormGroup() {//Método para captar la información del formulario registro con sus restricciones
     return new FormGroup({
       name: new FormControl('', [Validators.required, Validators.minLength(5), Validators.maxLength(50), Validators.pattern('[a-zA-Z ]*')]),
@@ -33,11 +42,9 @@ export class FormComponent implements OnInit {
       answer3: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]),
     });
   }
-  questions$:Observable<Question>;
-  personForm: FormGroup;//nombre del formulario para captar la información en html
+
   constructor(private dbData: DataDbService, private exportService:ExporterService,private dbDataQuestions: QuestionsService) {
     this.personForm = this.createFormGroup();//inicializar el formulario
-    this.x=0;
   }
 
   ngOnInit() {
@@ -55,6 +62,7 @@ export class FormComponent implements OnInit {
        question2: question.question2,
        question3: question.question3
      })
+
     //Inicio de SweetAlert para confirmar la accion a realizar
     Swal.fire({
       title:'Confirmar',
@@ -75,12 +83,6 @@ export class FormComponent implements OnInit {
     });
   }
 
-  ELEMENT_DATA: any[] = [
-   {name: "", email: "", number: null, question1: "", answer1: "", question2:"", answer2:"", question3: "",  answer3: ""}
- ];
-  dataSource = this.ELEMENT_DATA;
-
-
   exportAsXLSX(question:Question):void{
      this.personForm.patchValue({
        question1: question.question1,
@@ -98,8 +100,6 @@ export class FormComponent implements OnInit {
       this.dataSource[0].answer3=this.personForm.value.answer3;
        this.exportService.exportToExcel((this.dataSource), 'my_export');
      }
-
-
 
     private initValuesForm(question:Question):void{
       console.log(question)
